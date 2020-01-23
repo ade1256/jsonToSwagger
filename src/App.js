@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./Config/Router";
+import { Layout } from "antd";
+import { AppWrapper, ContentCenter } from "./index.style";
+const { Header, Footer, Content } = Layout;
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <BrowserRouter>
+    <AppWrapper>
+      <Layout>
+        <Header>
+          <h1>JSON to Swagger</h1>
+        </Header>
+        <Content>
+          <ContentCenter>
+            <Router />
+          </ContentCenter>
+        </Content>
+        <Footer>All right reserved &copy; 2020</Footer>
+      </Layout>
+    </AppWrapper>
+  </BrowserRouter>
+);
 
 export default App;
