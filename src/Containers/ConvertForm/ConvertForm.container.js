@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ConvertFormComponent from "./ConvertForm.component";
-import { Form } from "antd";
+import { Form, message } from "antd";
 import { SwaggerService } from "../../Services";
 
 const ConvertFormContainer = props => {
+  const [swaggerJson, setSwaggerJson] = useState(null);
   const fields = [
     {
       label: "Paste your schema json",
       field_name: "schema",
-      required: true
+      required: true,
+      size: 12
     }
   ];
 
@@ -16,24 +18,31 @@ const ConvertFormContainer = props => {
     e.preventDefault();
     props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
-        await SwaggerService.POST_CONVERT(values.schema).then(res=>{
-          console.log(res)
-        }).catch(err=>{
-          console.log(err)
-        });
+        // console.log(JSON.parse(values.schema));
+        await SwaggerService.POST_CONVERT(JSON.parse(values.schema))
+          .then(res => {
+            setSwaggerJson(res);
+          })
+          .catch(err => {
+            message.error(
+              "Error converting, please check again your schema. It must be JSON formatted !"
+            );
+          });
       }
     });
   };
 
   useEffect(() => {
-    const _pingServer = () => {
-      SwaggerService.GET_PING()
-        .then(res => {
-          console.log(res);
+    const _pingServer = async () => {
+      message.info("Checking server ...");
+      await SwaggerService.GET_PING()
+        .then(() => {
+          message.success("Server 200 OK");
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          message.error(
+            "Server didn't respond. Please refresh this page again.."
+          );
         });
     };
     _pingServer();
@@ -43,6 +52,7 @@ const ConvertFormContainer = props => {
       <ConvertFormComponent
         handleSubmit={handleSubmit}
         fields={fields}
+        swaggerJson={swaggerJson}
         {...props}
       />
     </div>

@@ -1,9 +1,10 @@
 import React from "react";
-import { Form, Button } from "antd";
+import { Form, Button, Row, Col } from "antd";
 import TextArea from "antd/lib/input/TextArea";
+import { Result, WrapperForm } from "./ConvertForm.style";
 
 const ConvertFormComponent = props => {
-  const { handleSubmit, fields } = props;
+  const { handleSubmit, fields, swaggerJson } = props;
   const { isFieldTouched, getFieldDecorator, getFieldError } = props.form;
 
   const _form = () => (
@@ -21,26 +22,34 @@ const ConvertFormComponent = props => {
     isFieldTouched(fieldName) && getFieldError(fieldName);
 
   const _mappingField = () => (
-    <div>
+    <Row gutter={8}>
       {fields.map(item => (
-        <Form.Item
-          label={item.label}
-          validateStatus={validateField(item.field_name) ? "error" : ""}
-          help={validateField(item.field_name) || ""}
-        >
-          {getFieldDecorator(item.field_name, {
-            rules: [
-              {
-                required: item.required,
-                message: `Please input ${item.field_name}`
-              }
-            ]
-          })(<TextArea rows={12} />)}
-        </Form.Item>
+        <Col span={item.size}>
+          <Form.Item
+            label={item.label}
+            validateStatus={validateField(item.field_name) ? "error" : ""}
+            help={validateField(item.field_name) || ""}
+          >
+            {getFieldDecorator(item.field_name, {
+              rules: [
+                {
+                  required: item.required,
+                  message: `Please input ${item.field_name}`
+                }
+              ]
+            })(<TextArea rows={12} />)}
+          </Form.Item>
+        </Col>
       ))}
-    </div>
+      <Col span={12}>
+        <Result>
+          <label>Result</label>
+          <TextArea rows={12} value={swaggerJson} />
+        </Result>
+      </Col>
+    </Row>
   );
-  return <div>{_form()}</div>;
+  return <WrapperForm>{_form()}</WrapperForm>;
 };
 
 export default ConvertFormComponent;

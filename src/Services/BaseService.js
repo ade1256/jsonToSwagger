@@ -1,12 +1,12 @@
-import axios from 'axios'
+import axios from "axios";
 
 const _createAxiosInterceptor = url => {
   const axiosCreate = axios.create({
     baseURL: url,
     headers: {
-      Accept: 'application/json',
-      'Accept-Language': 'es',
-      'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Accept-Language": "es",
+      "Content-Type": "application/json"
     }
   });
 
@@ -17,15 +17,13 @@ const _createAxiosInterceptor = url => {
     error => {
       return Promise.reject(error);
       // eslint-disable-next-line no-unreachable
-      console.log(error)
+      console.log(error);
     }
   );
 
   return axiosCreate;
 };
 
-const BaseService = _createAxiosInterceptor(
-  process.env.REACT_APP_BASE_URL_REST
-);
+const BaseService = _createAxiosInterceptor("https://json-any.herokuapp.com/");
 
 export default BaseService;
