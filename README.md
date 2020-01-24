@@ -55,15 +55,6 @@ There are a few ways in which Swagger can help drive your API development furthe
 		    npm install
 		    npm run start
 
-3. create file .env.production in the root project
-4. and then paste this code
-`REACT_APP_BASE_URL_REST=https://json-any.herokuapp.com`
-
-  
-  
-  
-  
-  
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
