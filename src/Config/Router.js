@@ -4,7 +4,8 @@ import { HomePage } from "../Pages";
 
 const routeList = [
   { path: "/", component: HomePage },
-  { path: "/home", component: HomePage }
+  { path: "/home", component: HomePage },
+  { path: "/jsonToSwagger", component: HomePage }
 ];
 
 const RouterSwitch = () => (
