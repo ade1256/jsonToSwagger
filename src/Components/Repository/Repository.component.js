@@ -19,10 +19,10 @@ const RepositoryComponent = () => {
       </p>
       <h3>Repositories</h3>
       <a href="https://github.com/ade1256/jsonToSwagger">
-        https://github.com/ade1256/jsonToSwagger
+        https://github.com/ade1256/jsonToSwagger (frontend)
       </a>
       <br />
-      <a href="https://github.com/mufti1/json-to-swagger">https://github.com/mufti1</a>
+      <a href="https://github.com/mufti1/json-to-swagger">https://github.com/mufti1/json-to-swagger (backend)</a>
     </div>
   );
 };
