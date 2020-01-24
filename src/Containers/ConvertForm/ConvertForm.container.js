@@ -18,9 +18,10 @@ const ConvertFormContainer = props => {
     e.preventDefault();
     props.form.validateFields(async (err, values) => {
       if (!err) {
-        // console.log(JSON.parse(values.schema));
+        message.info("Converting...")
         await SwaggerService.POST_CONVERT(JSON.parse(values.schema))
           .then(res => {
+            message.success("Your schema successfully converted.")
             setSwaggerJson(res);
           })
           .catch(err => {
