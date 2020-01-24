@@ -22,7 +22,7 @@ const RepositoryComponent = () => {
         https://github.com/ade1256/jsonToSwagger
       </a>
       <br />
-      <a href="https://github.com/mufti1">https://github.com/mufti1</a>
+      <a href="https://github.com/mufti1/json-to-swagger">https://github.com/mufti1</a>
     </div>
   );
 };
