@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Button, Row, Col } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { Result, WrapperForm } from "./ConvertForm.style";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const ConvertFormComponent = props => {
   const { handleSubmit, fields, swaggerJson } = props;
@@ -43,9 +44,12 @@ const ConvertFormComponent = props => {
       ))}
       <Col span={12}>
         <Result>
-          <label>Result</label>
+          <label>Result</label> 
           <TextArea rows={12} value={swaggerJson} />
         </Result>
+        <CopyToClipboard text={swaggerJson}>
+            <Button type="primary">Copy</Button>
+        </CopyToClipboard>
       </Col>
     </Row>
   );
