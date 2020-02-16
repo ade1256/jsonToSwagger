@@ -22,17 +22,25 @@ const ConvertFormContainer = props => {
         let json_schema = `{
           "json_schema": `+values.schema+`
         }`
+        
+        try {
+          let parsedJson = JSON.parse(json_schema)
 
-        await SwaggerService.POST_CONVERT(JSON.parse(json_schema))
+          await SwaggerService.POST_CONVERT(parsedJson)
           .then(res => {
             message.success("Your schema successfully converted.")
             setSwaggerJson(res);
           })
           .catch(err => {
             message.error(
-              "Error converting, please check again your schema. It must be JSON formatted !"
+              `Server Error: ${err}`
             );
           });
+        } catch(e) {
+          message.error(
+            `Error converting, please check again your schema. It must be JSON formatted ! err msg: ${e}`, 2
+          )
+        }
       }
     });
   };
